@@ -41,9 +41,9 @@ driver.get("https://app.meckano.co.il/")
 
 # Click on "כניסה"
 wait = WebDriverWait(driver, 20)  # wait up to 10 seconds
-# Find the input field by its id
-email_input = driver.find_element(By.ID, 'email')
-# Click on the input field
+# <input type="email" id="email" name="email" autocomplete="off" class="email" required="">
+# find by name and id
+email_input = wait.until(EC.element_to_be_clickable((By.NAME, 'email')))
 email_input.click()
 keyboard.write(email)
 div_element = driver.find_element(By.ID, 'password')
@@ -52,8 +52,16 @@ keyboard.write(password)
 time.sleep(2)
 login_button = driver.find_element(By.NAME, 'submit')
 login_button.click()
-# Find the div by its class name
-clock_div = wait.until(EC.element_to_be_clickable((By.ID, 'checkout-button')))
-# Click the div
-clock_div.click()
+try:
+    # Find the div by its class name
+    clock_div = wait.until(EC.element_to_be_clickable((By.ID, 'checkout-button')))
+    # Click the div
+    clock_div.click()
+except:
+    # <a id="checkin-button" href="#" onclick="return false;">
+    clock_div = wait.until(EC.element_to_be_clickable((By.ID, 'checkin-button')))
+    # Click the div
+    clock_div.click()
+# sleep 5
+time.sleep(5)
 pass
