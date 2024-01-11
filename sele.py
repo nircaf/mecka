@@ -110,11 +110,13 @@ time.sleep(5)
 if bool_checkout:
     try:
         clock_div = wait.until(EC.element_to_be_clickable((By.ID, 'checkin-button')))
+        str_email = "Successfully checked out"
     except:
         str_email = "Failed to checkout"
 else:
     try:
         clock_div = wait.until(EC.element_to_be_clickable((By.ID, 'checkout-button')))
+        str_email = "Successfully checked in"
     except:
         str_email = "Failed to checkin"
 
